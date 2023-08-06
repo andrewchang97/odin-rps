@@ -20,25 +20,27 @@ function getComputerChoice(){
 // Finally, it will return the outcome of the game, i.e. if they lost, "You lose!"
 // console.log(`Hello! Welcome to "rock, paper, scissors. What would you like to choose?`)
 // playerChoice = "scISSORs"
+let i = 0;
+let j = 0;
 function game(){
     if (choice === 'Rock' && playerChoice.toUpperCase() === "ROCK"){
     return console.log("You both tied!")
     } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "ROCK"){
-    return console.log("You win!")
+    return console.log("You win!"), i++;
     } else if (choice === 'Paper' && playerChoice.toUpperCase() === "ROCK"){
-    return console.log("You lose!")
+    return console.log("You lose!"), j++;
     } else if (choice === 'Rock' && playerChoice.toUpperCase() === "PAPER"){
-    return console.log("You win!")
+    return console.log("You win!"), i++;
     } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "PAPER"){
-    return console.log("You lose!")
+    return console.log("You lose!"), j++;
     } else if (choice === 'Paper' && playerChoice.toUpperCase() === "PAPER"){
     return console.log("You both tied!")
     } else if (choice === 'Rock' && playerChoice.toUpperCase() === "SCISSORS"){
-    return console.log("You lose!")
+    return console.log("You lose!"), j++;
     } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "SCISSORS"){
     return console.log("You both tied!")
     } else if (choice === 'Paper' && playerChoice.toUpperCase() === "SCISSORS"){
-    return console.log("You win!")
+    return console.log("You win!"), i++;
     } else{
     return console.log("error in game")
     }
@@ -46,7 +48,7 @@ function game(){
 // game();
 function gameCheck(){
     let answers = prompt("Welcome to rock, paper, scissors! Please enter each option, separated by a comma and no spaces(i.e. rock,paper,scissors,etc.) to play a 5 round game.")
-    console.log(answers);
+    // console.log(answers);
     playerAnswers = answers.toUpperCase();
     convertAnswers = playerAnswers.split(",")
     // console.log(convertAnswers)
@@ -87,7 +89,6 @@ function gameFive(){
     game();
 }
 function gameOfFive(){
-    let i=0;
     // console.log(convertAnswers);
     gameOnePerson = convertAnswers[0];
     // console.log(gameOnePerson)
@@ -104,6 +105,13 @@ function gameOfFive(){
     gameThree();
     gameFour();
     gameFive();
+if (i > j){
+    console.log("You won more rounds. You win the game!")
+} else if (i < j){
+    console.log("You lost more rounds. The computer wins!")
+} else if (i === j){
+    console.log("It was a tie game!")
+}
 }
 // After finishing a game, it will reroll the choice of rock, paper, or scissors.
 // New function of game(), it will play a 5 round game that keeps score and reports
