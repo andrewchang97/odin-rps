@@ -13,93 +13,69 @@ function getComputerChoice(){
         console.log("error in getComputerChoice")
     }
 }
+let playerScore = 0;
+let computerScore = 0;
+const buttonR = document.getElementById("buttonRock")
+buttonR.addEventListener("click",function(){
+    let playerSelect = "rock";
+    const result = playRound(playerSelect);
+    console.log(result);
+});
+const buttonP = document.getElementById("buttonPaper")
+buttonP.addEventListener("click",function(){
+    let playerSelect = "paper";
+    const result = playRound(playerSelect);
+    console.log(result);
+});
+const buttonS = document.getElementById("buttonScissors")
+buttonS.addEventListener("click",function(){
+    let playerSelect = "scissors";
+    const result = playRound(playerSelect);
+    console.log(result);
+});
 // Then, I will have players select either rock, paper, or scissors 
 // (and it will not be case sensitive)
 // Finally, it will return the outcome of the game, i.e. if they lost, "You lose!"
-let i = 0;
-let j = 0;
-function game(){
-    if (choice === 'Rock' && playerChoice.toUpperCase() === "ROCK"){
-    return console.log("You both tied!")
-    } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "ROCK"){
-    return console.log("You win!"), i++;
-    } else if (choice === 'Paper' && playerChoice.toUpperCase() === "ROCK"){
-    return console.log("You lose!"), j++;
-    } else if (choice === 'Rock' && playerChoice.toUpperCase() === "PAPER"){
-    return console.log("You win!"), i++;
-    } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "PAPER"){
-    return console.log("You lose!"), j++;
-    } else if (choice === 'Paper' && playerChoice.toUpperCase() === "PAPER"){
-    return console.log("You both tied!")
-    } else if (choice === 'Rock' && playerChoice.toUpperCase() === "SCISSORS"){
-    return console.log("You lose!"), j++;
-    } else if (choice === 'Scissors' && playerChoice.toUpperCase() === "SCISSORS"){
-    return console.log("You both tied!")
-    } else if (choice === 'Paper' && playerChoice.toUpperCase() === "SCISSORS"){
-    return console.log("You win!"), i++;
-    } else{
-    return console.log("error in game")
-    }
-}
-function gameCheck(){
-    let answers = prompt("Welcome to rock, paper, scissors! Please enter each option, separated by a comma and no spaces(i.e. rock,paper,scissors,etc.) to play a 5 round game.")
-    playerAnswers = answers.toUpperCase();
-    convertAnswers = playerAnswers.split(",")
-    if (convertAnswers.length === 5){
-        gameOfFive(convertAnswers, computerAnswers1);
-    } else if (convertAnswers.length > 5){
-        console.log("Too many inputs!")
-    } else if (convertAnswers.length < 5){
-        console.log("Too few answers!")
-    }
-}
-computerAnswers1 = getComputerChoice();
-gameCheck();
 
-function gameOne(){
-    getComputerChoice();
-    playerChoice = gameOnePerson;
-    game();
+function playRound(playerSelect){
+    const computerSelect = getComputerChoice();
+    if (computerSelect === playerSelect){
+    return `You both played ${playerSelect}. It's a tie!`;
+    } else if (
+    (computerSelect === 'Scissors' && playerSelect === "rock") ||
+    (computerSelect === 'Rock' && playerSelect === "paper") ||
+    (computerSelect === 'Paper' && playerSelect === "scissors")
+    ) {
+    return `Computer played ${computerSelect}. You played ${playerSelect}. You win!`;
+    } else {
+    return `Computer played ${computerSelect}. You played ${playerSelect}. You lose!`;
+    }
 }
-function gameTwo(){
-    getComputerChoice();
-    playerChoice = gameTwoPerson;
-    game();
-}
-function gameThree(){
-    getComputerChoice();
-    playerChoice = gameThreePerson;
-    game();
-}
-function gameFour(){
-    getComputerChoice();
-    playerChoice = gameFourPerson;
-    game();
-}
-function gameFive(){
-    getComputerChoice();
-    playerChoice = gameFivePerson;
-    game();
-}
-function gameOfFive(){
-    gameOnePerson = convertAnswers[0];
-    gameTwoPerson = convertAnswers[1];
-    gameThreePerson = convertAnswers[2];
-    gameFourPerson = convertAnswers[3];
-    gameFivePerson = convertAnswers[4];
-    gameOne();
-    gameTwo();
-    gameThree();
-    gameFour();
-    gameFive();
-if (i > j){
-    console.log("You won more rounds. You win the game!")
-} else if (i < j){
-    console.log("You lost more rounds. The computer wins!")
-} else if (i === j){
-    console.log("It was a tie game!")
-}
-}
+// gonna try cleaning up the following code, above.
+// function playRound(playerSelect){
+//     const computerSelect = getComputerChoice();
+//     if (computerSelect === 'Rock' && playerSelect === "ROCK"){
+//     return "You both tied!";
+//     } else if (computerSelect === 'Scissors' && playerSelect === "ROCK"){
+//     return "You win!";
+//     } else if (computerSelect === 'Paper' && playerSelect === "ROCK"){
+//     return "You lose!";
+//     } else if (computerSelect === 'Rock' && playerSelect === "PAPER"){
+//     return "You win!";
+//     } else if (computerSelect === 'Scissors' && playerSelect === "PAPER"){
+//     return "You lose!";
+//     } else if (computerSelect === 'Paper' && playerSelect === "PAPER"){
+//     return "You both tied!";
+//     } else if (computerSelect === 'Rock' && playerSelect === "SCISSORS"){
+//     return "You lose!";
+//     } else if (computerSelect === 'Scissors' && playerSelect === "SCISSORS"){
+//     return "You both tied!";
+//     } else if (computerSelect === 'Paper' && playerSelect === "SCISSORS"){
+//     return "You win!";
+//     } else{
+//     return console.log("error in game")
+//     }
+// }
 // After finishing a game, it will reroll the choice of rock, paper, or scissors.
 // New function of game(), it will play a 5 round game that keeps score and reports
 // a winner or loser at the end.
