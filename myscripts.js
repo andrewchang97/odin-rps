@@ -4,11 +4,11 @@ function getComputerChoice(){
     const options = ['Rock', 'Paper', 'Scissors']
     let computerChoice = Math.floor(Math.random() * options.length)
     if (computerChoice === 0){
-        return choice = 'Rock';
+        return choice = 'rock';
     } else if (computerChoice === 1){
-        return choice = 'Paper';
+        return choice = 'paper';
     } else if (computerChoice === 2){
-        return choice = 'Scissors';
+        return choice = 'scissors';
     } else{
         console.log("error in getComputerChoice")
     }
@@ -40,42 +40,37 @@ buttonS.addEventListener("click",function(){
 function playRound(playerSelect){
     const computerSelect = getComputerChoice();
     if (computerSelect === playerSelect){
+    document.getElementById("result").textContent = `Computer played ${computerSelect}. You played ${playerSelect}. You tied! You have ${playerScore} points.`;
     return `You both played ${playerSelect}. It's a tie!`;
     } else if (
-    (computerSelect === 'Scissors' && playerSelect === "rock") ||
-    (computerSelect === 'Rock' && playerSelect === "paper") ||
-    (computerSelect === 'Paper' && playerSelect === "scissors")
+    (computerSelect === 'scissors' && playerSelect === "rock") ||
+    (computerSelect === 'rock' && playerSelect === "paper") ||
+    (computerSelect === 'paper' && playerSelect === "scissors")
     ) {
-    return `Computer played ${computerSelect}. You played ${playerSelect}. You win!`;
-    } else {
-    return `Computer played ${computerSelect}. You played ${playerSelect}. You lose!`;
+    playerScore++;
+    document.getElementById("playerScore").textContent = "Player Score: " + playerScore;
+    document.getElementById("result").textContent = `Computer played ${computerSelect}. You played ${playerSelect}. You win! You have ${playerScore} points.`;
+    if (playerScore === 5){
+        document.getElementById("result").textContent = `Congratulations! You are the winner with ${playerScore} points. Refresh to play again!`;
+        disableButtons();
     }
+    return `Computer played ${computerSelect}. You played ${playerSelect}. You win! You have ${playerScore} points.`;
+    } else {
+    computerScore++;
+    document.getElementById("computerScore").textContent = "Computer Score: " + computerScore;
+    document.getElementById("result").textContent = `Computer played ${computerSelect}. You played ${playerSelect}. You lose! Computer has ${computerScore} points.`;
+    if (computerScore === 5){
+        document.getElementById("result").textContent = `Computer wins with ${computerScore} points. Refresh to play again!`;
+        disableButtons();
+    }
+    return `Computer played ${computerSelect}. You played ${playerSelect}. You lose! Computer has ${computerScore} points.`;
+    }
+function disableButtons() {
+    buttonR.disabled = true;
+    buttonP.disabled = true;
+    buttonS.disabled = true;
 }
-// gonna try cleaning up the following code, above.
-// function playRound(playerSelect){
-//     const computerSelect = getComputerChoice();
-//     if (computerSelect === 'Rock' && playerSelect === "ROCK"){
-//     return "You both tied!";
-//     } else if (computerSelect === 'Scissors' && playerSelect === "ROCK"){
-//     return "You win!";
-//     } else if (computerSelect === 'Paper' && playerSelect === "ROCK"){
-//     return "You lose!";
-//     } else if (computerSelect === 'Rock' && playerSelect === "PAPER"){
-//     return "You win!";
-//     } else if (computerSelect === 'Scissors' && playerSelect === "PAPER"){
-//     return "You lose!";
-//     } else if (computerSelect === 'Paper' && playerSelect === "PAPER"){
-//     return "You both tied!";
-//     } else if (computerSelect === 'Rock' && playerSelect === "SCISSORS"){
-//     return "You lose!";
-//     } else if (computerSelect === 'Scissors' && playerSelect === "SCISSORS"){
-//     return "You both tied!";
-//     } else if (computerSelect === 'Paper' && playerSelect === "SCISSORS"){
-//     return "You win!";
-//     } else{
-//     return console.log("error in game")
-//     }
-// }
+}
 // After finishing a game, it will reroll the choice of rock, paper, or scissors.
 // New function of game(), it will play a 5 round game that keeps score and reports
 // a winner or loser at the end.
